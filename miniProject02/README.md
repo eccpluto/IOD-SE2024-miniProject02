@@ -1,8 +1,9 @@
-# React + Vite
+# Mini Project 2: Lite Tube Plus
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aim is to allow a user to create playlists of videos from video hosting sites, without needing to create an account on those websites, i.e. they can create a single account on Lite Tube Plus (LTP). They can then log in anywhere to get their playlists and begin streaming.
 
-Currently, two official plugins are available:
+From a high level, this app will allow the user to create an account / log in with general accouint management, and store a library of pointers to videos, playlists, and create playlists in a library.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The user will be able to play videos directly from their library.
+
+As a bonus, I may add in the ability to convert video to audio and download video.
