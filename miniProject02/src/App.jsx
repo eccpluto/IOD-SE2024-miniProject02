@@ -11,10 +11,9 @@ function App() {
   return (
     <>
       {/* TODO provide context(s) */}
+      <NavBar />
       <AppRoutes>
-        <NavBar>
-          <p>Hello</p>
-        </NavBar>
+        <p>Hello</p>
       </AppRoutes>
     </>
   )
