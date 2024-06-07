@@ -16,6 +16,10 @@ import { NavLink } from 'react-router-dom';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+/**
+ * 
+ * @returns a NavBar component.
+ */
 function NavBar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
