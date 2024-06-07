@@ -1,6 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar'
 import AppRoutes from './routes/AppRoutes'
+import { UserProvider } from './context/UserContext'
 
 /**
  * 
@@ -11,10 +12,12 @@ function App() {
   return (
     <>
       {/* TODO provide context(s) */}
-      <NavBar />
-      <AppRoutes>
-        <p>Hello</p>
-      </AppRoutes>
+      <UserProvider>
+        <NavBar />
+        <AppRoutes>
+          <p>Hello</p>
+        </AppRoutes>
+      </UserProvider>
     </>
   )
 }
