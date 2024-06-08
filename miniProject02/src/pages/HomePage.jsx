@@ -1,6 +1,7 @@
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { CssBaseline } from "@mui/material";
+import { useThemeContext } from "../context/ThemeContext";
 
 /**
  * 
@@ -8,14 +9,14 @@ import { CssBaseline } from "@mui/material";
  */
 function HomePage() {
 
+    const themeContext = useThemeContext();
+
     return (
         <div className="HomePage">
-            <CssBaseline/>
-            <Container>
-                <Box sx={{ bgcolor: '#cfe8fc', height: '80vh' }}>
-                    <h1>Home</h1>
-                </Box>
-            </Container>
+            {/* <CssBaseline /> */}
+            <Box sx={{ bgcolor: themeContext.theme.background, display: "flex"}}>
+                <h1>Home contents</h1>
+            </Box>
         </div>
     )
 }
