@@ -1,5 +1,6 @@
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import { CssBaseline } from "@mui/material";
 
 /**
  * 
@@ -9,9 +10,10 @@ function HomePage() {
 
     return (
         <div className="HomePage">
+            <CssBaseline/>
             <Container>
                 <Box sx={{ bgcolor: '#cfe8fc', height: '80vh' }}>
-                    <h1>HomePage</h1>
+                    <h1>Home</h1>
                 </Box>
             </Container>
         </div>
