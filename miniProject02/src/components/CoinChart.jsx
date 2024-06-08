@@ -1,0 +1,6 @@
+function CoinChart(props) {
+    return(
+        <>
+        </>
+    )
+}
