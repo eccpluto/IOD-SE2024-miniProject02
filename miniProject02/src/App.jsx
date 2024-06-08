@@ -2,6 +2,7 @@ import './App.css'
 import NavBar from './components/NavBar'
 import AppRoutes from './routes/AppRoutes'
 import { UserProvider } from './context/UserContext'
+import { ThemeProvider } from './context/ThemeContext'
 
 /**
  * 
@@ -10,15 +11,17 @@ import { UserProvider } from './context/UserContext'
 function App() {
 
   return (
-    <>
+    <div className="App">
       {/* TODO provide context(s) */}
-      <UserProvider>
-        <NavBar />
-        <AppRoutes>
-          <p>Hello</p>
-        </AppRoutes>
-      </UserProvider>
-    </>
+      <ThemeProvider>
+        <UserProvider>
+          <NavBar />
+          <AppRoutes>
+            <p>Hello</p>
+          </AppRoutes>
+        </UserProvider>
+      </ThemeProvider>
+    </div>
   )
 }
 

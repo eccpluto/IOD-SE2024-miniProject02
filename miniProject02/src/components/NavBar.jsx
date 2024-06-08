@@ -1,54 +1,105 @@
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { useState } from 'react';
+import Menu from '@mui/material/Menu';
 import { NavLink } from 'react-router-dom';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+export default function NavBar() {
+    // TODO this will use UserContext
+    const [auth, setAuth] = React.useState(true);
+    const [anchorElMain, setAnchorElMain] = React.useState(null);
+    const [anchorElAccount, setAnchorElAccount] = React.useState(null);
 
-/**
- * 
- * @returns a NavBar component.
- */
-function NavBar() {
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
-
-    const handleOpenNavMenu = (e) => {
-        setAnchorElNav(e.currentTarget);
-    };
-    const handleOpenUserMenu = (e) => {
-        setAnchorElUser(e.currentTarget);
+    const handleChange = (event) => {
+        setAuth(event.target.checked);
     };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+    const handleMainMenu = (event) => {
+        setAnchorElMain(event.currentTarget);
+    }
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
+    const handleAccountMenu = (event) => {
+        setAnchorElAccount(event.currentTarget);
+    }
+
+    const handleClose = () => {
+        // reset both anchors to null
+        setAnchorElAccount(null);
+        setAnchorElMain(null);
+
     };
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Box sx={{ flexGrow: 1 }}>
+            {/* wrap controls */}
+            {/* <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup> */}
+            <AppBar position="absolute">
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="main menu"
+                        aria-controls='menu-main'
+                        aria-haspopup="true"
+                        onClick={handleMainMenu}
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Menu
+                        id="menu-main"
+                        anchorEl={anchorElMain}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElMain)}
+                        onClose={handleClose}
+                    >
+                        {/* home should display generic / same data for either auth state */}
+                        <MenuItem key="home" onClick={handleClose}>
+                            <NavLink to={'/'}>Home</NavLink>
+                        </MenuItem>
+
+                        <MenuItem key="navigator" onClick={handleClose}>
+                            <NavLink to={'/navigator'}>Navigator</NavLink>
+                        </MenuItem>
+
+                        <MenuItem key="about" onClick={handleClose}>
+                            <NavLink to={'/about'}>About Perspector</NavLink>
+                        </MenuItem>
+                    </Menu>
                     <Typography
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -57,122 +108,61 @@ function NavBar() {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            <MenuItem key="home" onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink to={'/'}>Home</NavLink>
-                                </Typography>
-                            </MenuItem>
-
-                            <MenuItem key="login" onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink to={'/login'}>Login</NavLink>
-                                </Typography>
-                            </MenuItem>
-
-                            <MenuItem key="rates" onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">
-                                    <NavLink to={'/rates'}>Bitcoin Rates</NavLink>
-                                </Typography>
-                            </MenuItem>
-                        </Menu>
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Perspector
                     </Typography>
-                    {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    {/* account button */}
+                    {auth && (
+                        <div>
+                            <IconButton
+                                size="large"
+                                aria-label="account of current user"
+                                aria-controls="menu-account"
+                                aria-haspopup="true"
+                                onClick={handleAccountMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle />
                             </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                            <Menu
+                                id="menu-account"
+                                anchorEl={anchorElAccount}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElAccount)}
+                                onClose={handleClose}
+                            >
+                                <MenuItem key="account" onClick={handleClose}>
+                                    <NavLink to={'/account'}>My Account</NavLink>
                                 </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+
+                                <MenuItem key="dashboard" onClick={handleClose}>
+                                    <NavLink to={'/dashboard'}>Dashboard</NavLink>
+                                </MenuItem>
+
+                                <MenuItem key="library" onClick={handleClose}>
+                                    <NavLink to={'/library'}>Library</NavLink>
+                                </MenuItem>
+
+                                {/* We should repalce the account circle with a "login" option when !auth */}
+                                <MenuItem key="logout" onClick={handleClose}>
+                                    <NavLink to={'/logout'}>Logout</NavLink>
+                                </MenuItem>
+                            </Menu>
+                        </div>
+                    )}
                 </Toolbar>
-            </Container>
-        </AppBar>
+            </AppBar>
+        </Box>
     );
 }
-export default NavBar;

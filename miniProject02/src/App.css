@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+body {
+  background-image: url('./assets/images/background_cyber_dark.jpg');
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
