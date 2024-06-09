@@ -53,7 +53,7 @@ export default function NavBar() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup> */}
-            <AppBar position="absolute">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
                         size="large"
