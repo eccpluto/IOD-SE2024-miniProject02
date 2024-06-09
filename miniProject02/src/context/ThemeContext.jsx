@@ -8,6 +8,13 @@ const themes = {
     dark: {
         foreground: "#ffffff",
         background: "#222222"
+    },
+    synthwave: {
+        foreground: "#FF3864",
+        background: "#0D0221",
+        primary:    "#FF6C11",
+        secondary:  "#2DE2E6",
+        tertiary:   "#261447",
     }
 }
 
@@ -18,10 +25,10 @@ const ThemeContext = createContext(
 
 function ThemeProvider({ children }) {
 
-    const [theme, setTheme] = useState(themes.dark)
+    const [theme, setTheme] = useState(themes.synthwave)
 
     return (
-        <ThemeContext.Provider value={{theme, setTheme}}>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
             {children}
         </ThemeContext.Provider>
     )

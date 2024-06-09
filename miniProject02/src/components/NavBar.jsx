@@ -12,12 +12,15 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { NavLink } from 'react-router-dom';
+import { useThemeContext } from '../context/ThemeContext';
 
 export default function NavBar() {
     // TODO this will use UserContext
     const [auth, setAuth] = React.useState(true);
     const [anchorElMain, setAnchorElMain] = React.useState(null);
     const [anchorElAccount, setAnchorElAccount] = React.useState(null);
+
+    const themeContext = useThemeContext(); 
 
     const handleChange = (event) => {
         setAuth(event.target.checked);
@@ -53,12 +56,14 @@ export default function NavBar() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup> */}
-            <AppBar position="fixed">
+            <AppBar position="fixed" sx={{
+                bgcolor: themeContext.theme.tertiary
+            }}>
                 <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
-                        color="inherit"
+                        color={themeContext.theme.primary}
                         aria-label="main menu"
                         aria-controls='menu-main'
                         aria-haspopup="true"

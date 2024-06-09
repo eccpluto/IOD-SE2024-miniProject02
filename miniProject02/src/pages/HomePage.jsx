@@ -1,6 +1,7 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useGetData } from "../hooks/useGetData";
 // import { CssBaseline } from "@mui/material";
 import { useThemeContext } from "../context/ThemeContext";
 import Grid from "@mui/material/Grid"
@@ -13,11 +14,26 @@ function HomePage() {
 
     const themeContext = useThemeContext();
 
+    // homepage will display random stocks
+    const financialDataGecko = useGetData("https://api.geckoterminal.com/api/v2/networks");
+    const financialDataCoinCap = useGetData("https://api.coincap.io/v2/assets");
+    const financialDataOpenER = useGetData("https://open.er-api.com/v6/latest/USD");
+
+    function handleClick() {
+        console.log(financialDataGecko);
+        console.log(financialDataCoinCap);
+        console.log(financialDataOpenER);
+            // CoinCap data: ${financialDataCoinCap},
+            // Open Exchange Rates data: ${financialDataOpenER}
+            // `)
+    }
+
     return (
         // wrap each page in a Container
         <Container maxWidth={false}
             sx={{
-                width: { sm: 5 },
+                // width: { sm: 5 },
+                borderRadius: 4,
                 bgcolor: themeContext.theme.background,
                 // bgcolor: "tomato",
                 // display: "flex",
@@ -26,15 +42,22 @@ function HomePage() {
             }}
         >
             {/* box's are mui divs, we want to vertically stack content in these */}
-            <Box>
+            <Box sx={{
+                color: themeContext.theme.foreground,
+                onclick: handleClick,
+            }}>
+
                 {/* page header */}
-                <Typography variant="h1" sx={{
-                    color: themeContext.theme.foreground
-                }}>
-                    Perspector - Stock insights
+                <Typography variant="h1" >
+                    Perspector
+                </Typography>
+                <Typography>
+                    Overview
                 </Typography>
 
             </Box>
+
+            {/* Map some popular stocks */}
         </Container>
     )
 }
