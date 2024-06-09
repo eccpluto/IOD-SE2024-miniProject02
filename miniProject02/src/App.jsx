@@ -3,7 +3,8 @@ import NavBar from './components/NavBar'
 import AppRoutes from './routes/AppRoutes'
 import { UserProvider } from './context/UserContext'
 import { ThemeProvider } from './context/ThemeContext'
-import { Toolbar } from '@mui/material'
+// import ThemeProvider from '@mui/material/styles/ThemeProvider'
+import { Toolbar, createTheme } from '@mui/material'
 
 /**
  * 
@@ -11,8 +12,18 @@ import { Toolbar } from '@mui/material'
  */
 function App() {
 
+  // const myTheme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: 
+  //     }
+  //   }
+  // });
+
   return (
     <>
+      {/* builtin MUI ThemeProvider requires theme as a prop */}
+      {/* <ThemeProvider theme={myTheme}>  */}
       <ThemeProvider>
         <UserProvider>
           <NavBar />
@@ -22,7 +33,7 @@ function App() {
           <Toolbar />
           <AppRoutes>Hello</AppRoutes>
         </UserProvider>
-      </ThemeProvider>
+      </ThemeProvider >
     </>
   )
 }
