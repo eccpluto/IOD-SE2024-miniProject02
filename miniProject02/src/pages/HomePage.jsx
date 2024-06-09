@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-// import Box from "@mui/material/Box";
+import Box from "@mui/material/Box";
 // import { CssBaseline } from "@mui/material";
 import { useThemeContext } from "../context/ThemeContext";
 import Grid from "@mui/material/Grid"
@@ -14,20 +14,27 @@ function HomePage() {
     const themeContext = useThemeContext();
 
     return (
+        // wrap each page in a Container
         <Container maxWidth={false}
             sx={{
-                // bgcolor: themeContext.theme.background,
-                bgcolor: "tomato",
+                width: { sm: 5 },
+                bgcolor: themeContext.theme.background,
+                // bgcolor: "tomato",
                 // display: "flex",
-                // height: "100vh",
+                height: "100vh",
                 width: 1,
-                p: 0,
-                m: 0
             }}
         >
-            <Typography variant="h1">
-                HomePage
-            </Typography>
+            {/* box's are mui divs, we want to vertically stack content in these */}
+            <Box>
+                {/* page header */}
+                <Typography variant="h1" sx={{
+                    color: themeContext.theme.foreground
+                }}>
+                    Perspector - Stock insights
+                </Typography>
+
+            </Box>
         </Container>
     )
 }
